@@ -43,7 +43,7 @@ initDb( err => {
         console.log('Error connecting to DB', err.name + ': ' + err.message);
     else {
         //set up server
-        const PORT = 8080 || process.env.PORT;
+        const PORT = process.env.PORT || 8080;
         const server = app.listen(PORT, () => {
             console.log(`Server is listening on port ${PORT}`);
         });
