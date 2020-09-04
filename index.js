@@ -1,4 +1,4 @@
-require('dotenv').config();     //load .env variables
+//require('dotenv').config();     //load .env variables
 const express       = require('express');
 const helmet        = require('helmet');
 const fileUpload    = require("express-fileupload");
