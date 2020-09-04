@@ -1,10 +1,7 @@
 const mongoose = require('mongoose');
-const express = require('express');
-const app = express();
-//const gridFS = require('gridfs-stream');
 
 let conn;
-//let gfs;
+let gfsBucket;
 
 module.exports = {
     initDb: (callback) => {
@@ -22,17 +19,17 @@ module.exports = {
         conn = mongoose.connection;      
         conn.on('error', err => {console.log('MongoDB error:' + err)});  //check for errors after initial connection
         
-        // Init gfs
-        // conn.once('open', () => {
-        //   // Init stream
-        //   gfs = gridFS(conn.db, mongoose.mongo);
-        //   gfs.collection('uploads');
-        // });
+        //Init gfs Bucket
+        conn.once('open', () => {
+            gfsBucket = new mongoose.mongo.GridFSBucket(conn.db,{
+                bucketName:'uploads'
+            });          
+        });
         
         return callback(null, conn);
     },
 
-    // getGfs: () => {
-    //     return gfs;
-    // }
+    getGfsBucket: () => {
+        return gfsBucket;
+    }
 }

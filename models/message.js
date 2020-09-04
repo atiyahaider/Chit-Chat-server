@@ -20,7 +20,6 @@ const MessageSchema = new Schema({
         required: true,
         default: 'txt'
     },
-    fileId: Schema.Types.ObjectId,
     date: {
         type: Date,
         default: Date.now

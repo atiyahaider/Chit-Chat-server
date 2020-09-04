@@ -1,9 +1,9 @@
-//require('dotenv').config();     //load .env variables
-const express   = require('express');
-const helmet    = require('helmet');
-const cors      = require('cors');
-const mongoose  = require('mongoose');
-const apiRoutes = require('./routes/apiRoutes.js');
+require('dotenv').config();     //load .env variables
+const express       = require('express');
+const helmet        = require('helmet');
+const fileUpload    = require("express-fileupload");
+const cors          = require('cors');
+const apiRoutes     = require('./routes/apiRoutes.js');
 
 const app = express();
 app.use( helmet( {
@@ -15,6 +15,7 @@ app.use( helmet( {
  );
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(fileUpload());
 app.use(cors());
 
 
@@ -37,7 +38,7 @@ app.use((error, req, res, next) => {
 })
 
 //initialize db before starting up the server
-const initDb = require('./db').initDb;
+const { initDb } = require('./db');
 initDb( err => {
     if (err) 
         console.log('Error connecting to DB', err.name + ': ' + err.message);
