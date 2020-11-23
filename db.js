@@ -33,5 +33,3 @@ module.exports = {
         return gfsBucket;
     }
 }
-
-// mongodb://chitchatadmin:Chit1Chat2@ds057234.mlab.com:57234/chitchat
